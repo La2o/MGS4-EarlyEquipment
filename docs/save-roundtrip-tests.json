@@ -1,0 +1,45 @@
+{
+  "scope": "Native save serializer and native load/validation routines on the game thread, isolated sandbox, serialized payload written to disk and read back. This does not exercise the manual-save UI or outer file writer.",
+  "payload_bytes": 33604,
+  "roundtrips": [
+    {
+      "roundtrip": 1,
+      "native_load_result": 0,
+      "native_error": 0,
+      "decrypted_bytes_exact": true,
+      "currency_restored": true,
+      "weapon_states_match": true,
+      "solid_eye_present": true
+    },
+    {
+      "roundtrip": 2,
+      "native_load_result": 0,
+      "native_error": 0,
+      "decrypted_bytes_exact": true,
+      "currency_restored": true,
+      "weapon_states_match": true,
+      "solid_eye_present": true
+    },
+    {
+      "roundtrip": 3,
+      "native_load_result": 0,
+      "native_error": 0,
+      "decrypted_bytes_exact": true,
+      "currency_restored": true,
+      "weapon_states_match": true,
+      "solid_eye_present": true
+    }
+  ],
+  "intentionally_damaged_payload_rejected": true,
+  "damaged_payload_error": 2,
+  "mod_save_encoder_decoder_hooks": false,
+  "version": "0.4.0",
+  "native_inventory_sync_before_checkpoint": true,
+  "saved_payload_checkpoint_reload_keeps_spent_stock": true,
+  "reload_observed": {
+    "clears": 2,
+    "ration": 1,
+    "M4_ammo": 17,
+    "earned_Stealth": 1
+  }
+}

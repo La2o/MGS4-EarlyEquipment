@@ -1,0 +1,57 @@
+{
+  "version": "0.4.0",
+  "scope": "Native inventory sync and checkpoint fixture to enter the actual Mk. II stage branch; movie skipped through normal game completion callback.",
+  "cycle_1": {
+    "ration_before": 2,
+    "ration_during_meeting": 2,
+    "M4_ammo_before": 13,
+    "M4_ammo_during_meeting": 13,
+    "duplicate_handover_skipped": true
+  },
+  "next_NGplus": {
+    "method": "Actual title procedure 198 with a simulated second Clear Data fixture, followed by real title_movie -> s01a00l flow; movie skipped by normal completion callback.",
+    "latest_carry_values_restored": true,
+    "observed": {
+      "clears": 2,
+      "progress": 0,
+      "ration": 3,
+      "M4_ammo": 77,
+      "Stealth": 1,
+      "Bandana": -1,
+      "SolidEye": 1,
+      "MkII": 1
+    }
+  },
+  "cycle_2": {
+    "ration_before": 1,
+    "ration_during_meeting": 1,
+    "M4_ammo_before": 17,
+    "M4_ammo_during_meeting": 17,
+    "newly_earned_stealth_preserved": true,
+    "unearned_bandana_absent": true,
+    "duplicate_handover_skipped": true,
+    "normal_completion_progress": 19,
+    "authentic_world_checkpoint_retest": true,
+    "movie_initialized_before_skip": true,
+    "rendered_post_meeting_gameplay_verified": true,
+    "pause_state_after_tutorials": 0
+  },
+  "same_clear_data_restarted": {
+    "clear_count_remains_2": true,
+    "latest_clear_stock_restored_instead_of_spent_stock": true,
+    "ration": 3,
+    "M4_ammo": 77,
+    "earned_stealth": 1,
+    "opening_inventory_verified_at_progress_1": true
+  },
+  "untouched_inventory_control": {
+    "normal_native_handover_ran": true,
+    "solid_eye_before": -1,
+    "solid_eye_after": 1,
+    "rations_before": 2,
+    "rations_after": 3,
+    "M4_ammo_after": 300,
+    "movie_initialized_before_skip": true,
+    "normal_completion_progress": 19
+  }
+}

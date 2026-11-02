@@ -1,0 +1,20 @@
+{
+  "package_version": "0.4.1",
+  "asi_version": "0.4.0",
+  "archive_crc_valid": true,
+  "payload_hashes_valid": true,
+  "allowlisted_archive_entries": [
+    "README.md",
+    "Launch-MGS4.cmd",
+    "Backup-MGS4Saves.ps1",
+    "MGS4/winmm.dll",
+    "MGS4/scripts/MGS4EarlyEquipment.asi",
+    "licenses/MinHook.txt",
+    "licenses/Ultimate-ASI-Loader.txt",
+    "SHA256.json"
+  ],
+  "no_test_exports": true,
+  "installed_asi_matches_release": true,
+  "zip_sha256": "1a7425db3185de44517575034263770db3ddec988dda66d7c2db68138ec16cc8",
+  "clean_cold_start_no_development_modules": true
+}

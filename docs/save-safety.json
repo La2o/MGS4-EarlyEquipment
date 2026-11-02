@@ -1,0 +1,26 @@
+{
+  "version": "0.4.0",
+  "original_files_compared": 14,
+  "original_files_matching_earliest_backup": 12,
+  "original_gameplay_save_files_unchanged": true,
+  "changed_profile_files": [
+    "usersv",
+    "usersv.bak"
+  ],
+  "changed_profile_files_timestamp": "2026-11-02 00:56:07, before isolated story tests",
+  "prelaunch_backup_files_verified": 14,
+  "latest_backup": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\METAL GEAR SOLID 4\\MGS4-SaveBackups\\20261102-151138-820-f8f57d6b",
+  "clean_game_launch_with_backup_passed": true,
+  "native_codec_roundtrips_passed": 3,
+  "damaged_payload_rejected": true,
+  "checkpoint_reload_preserves_spent_stock_and_earned_gear": true,
+  "manual_save_UI_and_outer_writer_tested": true,
+  "release_archive_hash_manifest_verified": true,
+  "test_helper_absent_from_final_game": true,
+  "installed_release_cold_start_ready": true,
+  "package_version": "0.4.1",
+  "manual_save_details": "manual-save-tests.json",
+  "cold_UI_load_with_mod_passed": true,
+  "cold_UI_load_without_mod_passed": true,
+  "extended_UI_test_baseline_files_unchanged": 14
+}

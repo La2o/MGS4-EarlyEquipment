@@ -1,0 +1,8 @@
+{
+  "backup_failure_blocks_game_launch": true,
+  "success_starts_game_after_backup": true,
+  "backups_preserve_exact_bytes": true,
+  "previous_backups_not_overwritten": true,
+  "source_saves_unchanged": true,
+  "running_game_backup_rejected_in_live_test": true
+}

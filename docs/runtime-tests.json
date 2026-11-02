@@ -1,0 +1,16 @@
+{
+  "version": "0.3.0",
+  "scope": "Real s01a10l world, disposable NG+ carry fixture, native game-thread RPC",
+  "checks": {
+    "all_67_carried_weapons_match": true,
+    "solid_eye": true,
+    "mk_ii": true,
+    "unearned_bandana_locked": true,
+    "unearned_stealth_locked": true,
+    "camo_matches": true,
+    "Mk. II does not refill spent supplies": true,
+    "Unmodified save reload still receives native handover": true,
+    "M4 model preloaded and equipped in playable world": true,
+    "spent ration stays spent across frames": true
+  }
+}

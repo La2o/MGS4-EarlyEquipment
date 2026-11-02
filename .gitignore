@@ -1,0 +1,8 @@
+/research/
+/tools/
+/build/
+/backups/
+/dist/
+*.log
+/docs/WORKSPACE_TREE.txt
+__pycache__/

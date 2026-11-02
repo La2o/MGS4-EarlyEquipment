@@ -1,0 +1,52 @@
+{
+  "version": "0.4.0",
+  "scope": "Fresh isolated game and separate save folder. Normal Load Game UI loaded original copy. Native helper opened pause menu and selected Save because automated keyboard input was ignored; mouse confirmed normal Save/New Save/Yes widgets. Native outer file writer created an actual new slot. No direct test writes to saved payload.",
+  "pre_MkII_new_slot": {
+    "slot": "BLJM67001G6AE89725",
+    "bytes": 33613,
+    "sha256": "b22609c88772196ed33ddcc650e0571c452f8aed91a3e5347600a8420fe9dd9b",
+    "scenario": 17,
+    "all_95_weapon_states_match_live": true,
+    "all_68_ammo_pools_match_live": true,
+    "all_99_item_states_match_live": true,
+    "camo_matches_live": true,
+    "SolidEye": 1,
+    "MkII": 1,
+    "ration": 3,
+    "M4_ammo": 300,
+    "cold_UI_reload_passed": true,
+    "all_inventory_and_carry_arrays_exact_after_restart": true,
+    "no_repeated_early_handover_on_cold_reload": true,
+    "release_only_no_test_helper_during_reload": true
+  },
+  "cold_reload_pending": false,
+  "checkpoint_semantics_control": {
+    "live_ration_after_checkpoint": 1,
+    "live_M4_ammo_after_checkpoint": 17,
+    "manual_save_retained_checkpoint_ration": 3,
+    "manual_save_retained_checkpoint_M4_ammo": 300,
+    "matches_native_menu_warning": true
+  },
+  "post_MkII_manual_save": {
+    "slot": "BLJM67001G6AE89907",
+    "scenario": 19,
+    "ration": 1,
+    "M4_ammo": 17,
+    "all_weapon_ammo_item_arrays_match_live": true,
+    "native_UI_write_passed": true,
+    "sha256": "45c0a6b63bd922cf8cbc3beb8a3db257b53438999b8a819532f39defc4e351a8",
+    "scope": "Entered actual MkII branch using native-sync checkpoint fixture, skipped initialized movie with native completion callback, then native stage checkpoint committed inventory. Save/New Save/Yes confirmed via normal UI.",
+    "cold_UI_reload_without_mod_passed": true,
+    "all_inventory_camo_carry_arrays_exact_after_restart": true,
+    "test_helper_and_release_ASI_both_absent_during_reload": true
+  },
+  "all_14_original_files_unchanged_during_extended_UI_tests": true,
+  "original_save_slot_not_overwritten_in_sandbox": true,
+  "unmodded_cold_load_inventory_verified": true,
+  "other_installed_ASI_mods": [],
+  "not_tested": [
+    "Full campaign completion and entire opening traversal",
+    "Other mods and executable builds"
+  ],
+  "normal_installed_game_restored_without_test_helpers": true
+}

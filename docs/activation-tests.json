@@ -1,0 +1,56 @@
+[
+  {
+    "test": "opening NG+",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "test": "normal NG, separate +2 field is nonzero",
+    "actual": 2,
+    "expected": 2,
+    "passed": true
+  },
+  {
+    "test": "after Mk. II",
+    "actual": 2,
+    "expected": 2,
+    "passed": true
+  },
+  {
+    "test": "later act",
+    "actual": 2,
+    "expected": 2,
+    "passed": true
+  },
+  {
+    "test": "invalid difficulty",
+    "actual": 2,
+    "expected": 2,
+    "passed": true
+  },
+  {
+    "test": "invalid carry buffer",
+    "actual": 2,
+    "expected": 2,
+    "passed": true
+  },
+  {
+    "test": "second opening area",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "test": "pre-Mk. II area",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "test": "already restored, spent ration",
+    "actual": 3,
+    "expected": 3,
+    "passed": true
+  }
+]
