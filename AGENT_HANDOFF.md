@@ -15,10 +15,11 @@ safety, repeated-NG+ checks, and cutscene skipping while testing.
 
 Implemented and installed: native Windows x64 ASI **0.4.0**. Latest release
 package: **0.4.1**, which updates documentation after manual-save tests; its
-ASI is unchanged from 0.4.0. Package **0.4.2** is being prepared for public
-release: public README, configurable launcher language, MIT license, same ASI.
-It waits on a real playthrough of the user's Red Zone NG+ save through Mk. II. The normal installed game was restarted after
-testing. Test DLLs were verified absent from that process. Recheck live state;
+ASI is unchanged from 0.4.0. Package **0.4.2** is the public-release package:
+public README, configurable launcher language, MIT license, same ASI. On
+2026-11-02 the user played their Red Zone NG+ save through the Mk. II meeting
+with normal input (`docs/real-play-tests.json`). It is not published yet.
+The normal installed game was restarted after testing. Test DLLs were verified absent from that process. Recheck live state;
 do not reuse an old PID or window handle.
 
 The mod restores earned inventory/ammo/camo using the original game procedures.
@@ -96,6 +97,7 @@ All addresses below are RVAs relative to the current ASLR module base.
 
 | Artifact | SHA-256 |
 | --- | --- |
+| `dist/MGS4-EarlyEquipment-0.4.2.zip` | `e8e2dbd7acce8b00c5219825b625b988fc453a188d869fb1397ac19d54a5afd6` |
 | `dist/MGS4-EarlyEquipment-0.4.1.zip` | `1a7425db3185de44517575034263770db3ddec988dda66d7c2db68138ec16cc8` |
 | `dist/MGS4/scripts/MGS4EarlyEquipment.asi` | `95e32eba9fc9a407ceb4acd1aca8ead614c1ee9ed4b55184ecc0068c44f62574` |
 | `dist/MGS4/winmm.dll` | `57ec56390c92a18b82f58855e63c93985e254d1e29d5f75cbc28dc08f96c8a12` |
@@ -103,7 +105,7 @@ All addresses below are RVAs relative to the current ASLR module base.
 The 0.4.1 ZIP has eight allowlisted entries: README, launch CMD, backup
 PowerShell script, loader, ASI, two licenses, and SHA256.json. From 0.4.2 a
 ninth entry, `licenses/MGS4-EarlyEquipment.txt`, carries the project's MIT
-license; record the 0.4.2 ZIP hash once it is final. No saves, game
+license. No saves, game
 assets, PDBs or test helpers. The loader is Ultimate ASI Loader x64 10.0.2;
 MinHook source is v1.3.4. Older ZIPs in dist are retained historical artifacts.
 
@@ -157,6 +159,7 @@ Do not cite either abandoned fixture as a proven game/mod failure.
 | Native checkpoint semantics | Reducing live stock after a checkpoint did not change that checkpoint's manual-save stock. The menu explicitly warns it saves last-checkpoint state. This behavior is retained. |
 | Backup/launcher | Backup byte/hash verification; distinct retained backups; launch blocked on actual filesystem backup failure; successful backup launches marker/game; running-game backup rejected. |
 | Packaging/install | Hash manifests/archive allowlist, matching installed ASI, unsupported installer/host rejection and clean release startup without development modules. |
+| Real play (2026-11-02) | User, normal input, installed release ASI and 0.4.2 launcher. Real NG+ Red Zone save loaded from title: restored at s01a10l/17, Mk. II meeting and cutscene played, duplicate handover skipped, no crash events. Spent stock not observed; no save/reload. |
 
 UI test qualification: automated keyboard events were ignored. The local
 helper invoked native pause construction and selected the Save row; mouse

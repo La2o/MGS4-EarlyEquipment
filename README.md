@@ -84,6 +84,10 @@ To restore a backup, close MGS4 and keep a copy of your current
 
 Tested on Windows with Steam version 1.4.1:
 
+- **Real play:** an NG+ save on The Boss Extreme, loaded from the title menu in
+  the Red Zone before Mk. II. Gear was restored on load, the Mk. II meeting and
+  cutscene played normally, and the duplicate handover was skipped. That
+  session didn't include saving and reloading.
 - **Starting NG+ from Clear Data:** tested with simulated Clear Data in game
   memory through the game's own NG+ setup; the opening movie was skipped. The
   latest earned gear and ammo were restored and unearned items stayed locked.

@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-02",
+  "package": "0.4.2 candidate",
+  "asi_version": "0.4.0",
+  "asi_sha256": "95e32eba9fc9a407ceb4acd1aca8ead614c1ee9ed4b55184ecc0068c44f62574",
+  "scope": "Human player, normal input, installed game with only the release ASI; no test helper, fixture or movie skip.",
+  "launch": "Launch-MGS4.cmd with the default English/EU settings. Its verified backup (14 files with BACKUP-SHA256.json) completed one second before the mod started.",
+  "save_loaded_from_title_menu": {
+    "type": "NG+ after 1 completed run",
+    "difficulty": "The Boss Extreme (50)",
+    "stage": "s01a10l",
+    "progress": 17,
+    "solid_eye_before": -1
+  },
+  "mod_log": [
+    "Restored earned inventory and camo at s01a10l, progress 17, completed runs 1 (Solid Eye -1 -> 1).",
+    "Skipped duplicate Mk. II inventory handover."
+  ],
+  "player_reported": {
+    "mk_ii_cutscene_played_normally": true,
+    "quit_normally_afterwards": true,
+    "spent_stock_checked": false,
+    "manual_save_and_reload": false
+  },
+  "crash_or_error_report_events": 0,
+  "original_gameplay_save_files_unchanged": true,
+  "not_verified_in_this_session": [
+    "Spent ammo/rations across Mk. II were not observed by the player",
+    "No manual save or reload"
+  ]
+}

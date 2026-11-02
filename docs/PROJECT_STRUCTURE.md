@@ -49,6 +49,7 @@ MGS4-EarlyEquipment/
 |   |-- story-tests.json        Native NG+ reset and Mk. II stage branch results
 |   |-- save-roundtrip-tests.json Native codec/validator round trips
 |   |-- manual-save-tests.json  Save UI, native writer, cold loads with/without ASI
+|   |-- real-play-tests.json    Human play of a Red Zone NG+ save through Mk. II
 |   |-- save-safety.json        Baselines, backup and save-safety summary
 |   |-- save-integrity.json     Earlier compact save-integrity result
 |   |-- backup-tests.json       Backup/launcher results
@@ -100,8 +101,8 @@ game. Do not traverse them for backup, cleanup, source export or public archives
 
 ## Release layout
 
-`package.ps1` builds `dist/MGS4-EarlyEquipment-<version>.zip` (0.4.2 is being
-prepared; 0.4.1 is the latest finished release):
+`package.ps1` builds `dist/MGS4-EarlyEquipment-<version>.zip`; the current
+package is 0.4.2:
 
 ```text
 README.md
