@@ -20,7 +20,9 @@ public README, configurable launcher language, MIT license, same ASI. On
 2026-11-02 the user played their Red Zone NG+ save through the Mk. II meeting
 with normal input (`docs/real-play-tests.json`). Published 2026-11-02 as an
 **alpha** (the user asked for "IN ALPHA, BACKUP YOUR SAVES" and a call for more
-testers): public GitHub repo, then a Nexus Mods page.
+testers): public GitHub repo and Nexus Mods page
+https://www.nexusmods.com/metalgearsolid4mc/mods/110 (page text and settings in
+`docs/nexus-page.md`).
 The normal installed game was restarted after testing. Test DLLs were verified absent from that process. Recheck live state;
 do not reuse an old PID or window handle.
 
@@ -349,5 +351,7 @@ attempts reliably terminated the actor; rely on the narrower report scope.
 - The current release needs no known code fix from the latest tests. Preserve
   the verified ASI/release hashes unless intentionally changing/rebuilding it.
 
-Published 2026-11-02 at the user's request: the public GitHub repo above and a
-Nexus Mods page for 0.4.2, both marked alpha.
+Published 2026-11-02 at the user's request: the public GitHub repo above and the
+Nexus Mods page https://www.nexusmods.com/metalgearsolid4mc/mods/110 for 0.4.2,
+both marked alpha. A new release must update the README, ZIP, GitHub and the
+Nexus page together, and keep the alpha warning until the user says otherwise.

@@ -3,6 +3,11 @@
 Source for the Nexus Mods page fields, kept here so later releases update the
 same wording. The description is Nexus BBCode.
 
+Live page: https://www.nexusmods.com/metalgearsolid4mc/mods/110 (published
+2026-11-02 from the user's Nexus account; mod rewards not opted in). The
+third-party question is answered "Yes (I have permission)" with the credits
+below, and permissions use the custom MIT terms below.
+
 ## Name
 
 MGS4 Early Equipment
