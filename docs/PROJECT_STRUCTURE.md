@@ -140,7 +140,8 @@ there do not imply those files are included in the archive.
 
 ## Git status and next-agent setup
 
-The project root is a local Git repository on branch `main`, with no remote.
+The project root is a Git repository on branch `main`; remote `origin` is the
+public https://github.com/La2o/MGS4-EarlyEquipment.
 `external/` holds three pinned submodules; run `git submodule update --init`
 after cloning. Other nested Git directories belong to research checkouts under
 ignored `research/`. Keep private/generated material excluded. Owned harness

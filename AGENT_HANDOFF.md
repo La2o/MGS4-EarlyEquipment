@@ -18,7 +18,9 @@ package: **0.4.1**, which updates documentation after manual-save tests; its
 ASI is unchanged from 0.4.0. Package **0.4.2** is the public-release package:
 public README, configurable launcher language, MIT license, same ASI. On
 2026-11-02 the user played their Red Zone NG+ save through the Mk. II meeting
-with normal input (`docs/real-play-tests.json`). It is not published yet.
+with normal input (`docs/real-play-tests.json`). Published 2026-11-02 as an
+**alpha** (the user asked for "IN ALPHA, BACKUP YOUR SAVES" and a call for more
+testers): public GitHub repo, then a Nexus Mods page.
 The normal installed game was restarted after testing. Test DLLs were verified absent from that process. Recheck live state;
 do not reuse an old PID or window handle.
 
@@ -71,7 +73,10 @@ Backup launcher: <game root>\Launch-MGS4.cmd
 ```
 
 The project root is a local Git repository on branch `main`, initialized
-2026-11-02. It has no remote and nothing has been pushed. Submodules in
+2026-11-02. Remote `origin` is the public repo
+https://github.com/La2o/MGS4-EarlyEquipment (first pushed 2026-11-02). Commits
+use the GitHub no-reply identity `La2o`; never commit the user's personal
+email, Steam ID or Windows username. Submodules in
 `external/` are pinned upstream tags: MinHook v1.3.4, MGS4 Best Trainer Ever
 V2.7.0 (ProcessHandle and save decoder for the harness) and bbtracker v0.5.0
 (VPAK reader, research notes). Run `git submodule update --init` after a fresh
@@ -97,7 +102,7 @@ All addresses below are RVAs relative to the current ASLR module base.
 
 | Artifact | SHA-256 |
 | --- | --- |
-| `dist/MGS4-EarlyEquipment-0.4.2.zip` | `e8e2dbd7acce8b00c5219825b625b988fc453a188d869fb1397ac19d54a5afd6` |
+| `dist/MGS4-EarlyEquipment-0.4.2.zip` | `c086c558383abbcbaee89cb3b04e197e4b38773a3afaf9cdc9da748d9551066a` |
 | `dist/MGS4-EarlyEquipment-0.4.1.zip` | `1a7425db3185de44517575034263770db3ddec988dda66d7c2db68138ec16cc8` |
 | `dist/MGS4/scripts/MGS4EarlyEquipment.asi` | `95e32eba9fc9a407ceb4acd1aca8ead614c1ee9ed4b55184ecc0068c44f62574` |
 | `dist/MGS4/winmm.dll` | `57ec56390c92a18b82f58855e63c93985e254d1e29d5f75cbc28dc08f96c8a12` |
@@ -344,4 +349,5 @@ attempts reliably terminated the actor; rely on the narrower report scope.
 - The current release needs no known code fix from the latest tests. Preserve
   the verified ASI/release hashes unless intentionally changing/rebuilding it.
 
-No publication, Git push or remote communication was performed for this project.
+Published 2026-11-02 at the user's request: the public GitHub repo above and a
+Nexus Mods page for 0.4.2, both marked alpha.

@@ -1,5 +1,10 @@
 # MGS4 Early Equipment
 
+> [!WARNING]
+> **IN ALPHA. BACK UP YOUR SAVES.** Testing so far has been thorough, but the
+> mod still needs more testers before it can be called stable. See
+> [Help test it](#help-test-it) and report anything unexpected.
+
 An ASI mod for **Metal Gear Solid 4: Guns of the Patriots** in the **Master
 Collection on Steam (Windows)**. In New Game Plus, the gear you earned in your
 completed playthrough is available from the opening area, instead of only
@@ -9,8 +14,8 @@ The mod runs the game's own carry-over routines, so you get exactly what your
 Clear Data holds, with the game's normal ammo limits. It never adds equipment
 you didn't earn.
 
-Release 0.4.2. The mod file itself is version 0.4.0, which is what its log
-reports; this release only updates the launcher, documentation and license.
+Release 0.4.2 (alpha). The mod file itself is version 0.4.0, which is what its
+log reports; this release only updates the launcher, documentation and license.
 
 ## Requirements
 
@@ -103,6 +108,19 @@ Tested on Windows with Steam version 1.4.1:
 
 Not tested: a complete playthrough, other game versions, and every crash,
 power-loss or mod-conflict case. Back up your saves.
+
+## Help test it
+
+Reports from these situations help most:
+
+- Starting NG+ from Clear Data at the very beginning of the game.
+- Saving after the Mk. II meeting and loading that save again.
+- Checking that ammo and rations you spent before Mk. II stay spent after it.
+- Other difficulties, other languages, and Linux or Steam Deck.
+
+Report what you did and what you saw, and include
+`MGS4\scripts\MGS4EarlyEquipment.log`. Use the mod page's bug reports, or
+[GitHub issues](https://github.com/La2o/MGS4-EarlyEquipment/issues).
 
 ## Remove
 
