@@ -15,7 +15,9 @@ safety, repeated-NG+ checks, and cutscene skipping while testing.
 
 Implemented and installed: native Windows x64 ASI **0.4.0**. Latest release
 package: **0.4.1**, which updates documentation after manual-save tests; its
-ASI is unchanged from 0.4.0. The normal installed game was restarted after
+ASI is unchanged from 0.4.0. Package **0.4.2** is being prepared for public
+release: public README, configurable launcher language, MIT license, same ASI.
+It waits on a real playthrough of the user's Red Zone NG+ save through Mk. II. The normal installed game was restarted after
 testing. Test DLLs were verified absent from that process. Recheck live state;
 do not reuse an old PID or window handle.
 
@@ -98,8 +100,10 @@ All addresses below are RVAs relative to the current ASLR module base.
 | `dist/MGS4/scripts/MGS4EarlyEquipment.asi` | `95e32eba9fc9a407ceb4acd1aca8ead614c1ee9ed4b55184ecc0068c44f62574` |
 | `dist/MGS4/winmm.dll` | `57ec56390c92a18b82f58855e63c93985e254d1e29d5f75cbc28dc08f96c8a12` |
 
-Release ZIP has exactly eight allowlisted entries: README, launch CMD, backup
-PowerShell script, loader, ASI, two licenses, and SHA256.json. No saves, game
+The 0.4.1 ZIP has eight allowlisted entries: README, launch CMD, backup
+PowerShell script, loader, ASI, two licenses, and SHA256.json. From 0.4.2 a
+ninth entry, `licenses/MGS4-EarlyEquipment.txt`, carries the project's MIT
+license; record the 0.4.2 ZIP hash once it is final. No saves, game
 assets, PDBs or test helpers. The loader is Ultimate ASI Loader x64 10.0.2;
 MinHook source is v1.3.4. Older ZIPs in dist are retained historical artifacts.
 
@@ -202,7 +206,7 @@ tests because clients select by executable name and share an RPC mapping.
 ## 8. Build, install, package and direct launch
 
 ```powershell
-Set-Location '%USERPROFILE%\Claude\MGS4-EarlyEquipment'
+Set-Location "$env:USERPROFILE\Claude\MGS4-EarlyEquipment"
 .\build.ps1
 .\install.ps1
 .\package.ps1

@@ -1,135 +1,138 @@
 # MGS4 Early Equipment
 
-Package **0.4.1** (tested ASI **0.4.0**) - Windows x64 ASI mod for **Metal Gear Solid 4 — Master Collection, Steam 1.4.1**.
+An ASI mod for **Metal Gear Solid 4: Guns of the Patriots** in the **Master
+Collection on Steam (Windows)**. In New Game Plus, the gear you earned in your
+completed playthrough is available from the opening area, instead of only
+after you meet Metal Gear Mk. II.
 
-Restores the equipment carried from your completed playthrough during an opening
-New Game Plus stage, before meeting Metal Gear Mk. II. It uses the
-game's own inventory and camo restoration procedures, including the normal
-starting-ammo minimums. It does not grant equipment absent from your clear data.
+The mod runs the game's own carry-over routines, so you get exactly what your
+Clear Data holds, with the game's normal ammo limits. It never adds equipment
+you didn't earn.
 
-## Installed on this PC
+Release 0.4.2. The mod file itself is version 0.4.0, which is what its log
+reports; this release only updates the launcher, documentation and license.
 
-The mod is installed in:
+## Requirements
 
-```text
-C:\Program Files (x86)\Steam\steamapps\common\METAL GEAR SOLID 4\MGS4\scripts\MGS4EarlyEquipment.asi
-```
+- Metal Gear Solid 4 from the Master Collection on Steam, game version 1.4.1.
+  The mod checks the exact `mgs4.exe` and stays inactive on any other build,
+  so a game update disables it until the mod is updated.
+- A completed playthrough: start NG+ from your Clear Data, or load an NG+ save
+  from Act 1 before the Mk. II meeting.
 
-Start NG+ by loading Clear Data, or load an opening NG+ save after installation.
-Check `MGS4\scripts\MGS4EarlyEquipment.log` for a `Restored earned inventory`
-entry. The mod also recognizes an early save that already contains its gear,
-so loading that save does not refill everything again.
+## Install
 
-`Launch-MGS4.cmd` in the game's root starts MGS4 directly and skips the Master
-Collection launcher. Keep Steam running. The shortcut currently uses English
-and the European region, matching this PC's original launch arguments.
+1. Close the game.
+2. Extract the ZIP into the game folder, the one that contains the `MGS4`
+   folder. By default that is
+   `C:\Program Files (x86)\Steam\steamapps\common\METAL GEAR SOLID 4`.
+3. Already using other ASI mods? Keep your existing loader (`winmm.dll` or
+   `dinput8.dll` in `MGS4`) and copy only `MGS4\scripts\MGS4EarlyEquipment.asi`.
 
-## Save protection
+The bundled `MGS4\winmm.dll` is Ultimate ASI Loader x64 10.0.2.
 
-Use `Launch-MGS4.cmd` for a verified backup before each launch. It copies the
-complete `mgs4_savedata_win` folder into a new timestamped folder under
-`MGS4-SaveBackups` beside the game, verifies SHA-256 hashes, and checks that the
-source did not change during copying. Old backups are retained. If backup
-creation or verification fails, the launcher stops before starting the game.
-Launching through Steam directly does not run this backup step.
+## Use
 
-The ASI leaves the native save encoder, checksum validation, and file writer
-unchanged. Three round trips through the native save serializer/loader passed in
-an isolated game copy, followed by a real checkpoint reload with gear intact.
-A deliberately damaged payload was rejected by the native checksum validator.
-The native Save/New Save/Yes interface also wrote new slots before and after
-Mk. II. The early save cold-loaded with the release ASI and exact inventory,
-ammo, items, camo and carry data, without a repeated handover. The post-Mk. II
-save retained 1 ration and 17 M4 reserve rounds and cold-loaded with the ASI
-removed. A helper opened the pause menu and selected its Save row because test
-keyboard input was ignored; normal UI confirmations and the native file writer
-performed the saves. This is evidence against corruption, not a guarantee
-against every crash, power loss, or conflict with another mod.
+Load your Clear Data to start NG+, or load an NG+ save from Act 1 before
+Mk. II. Your earned gear appears as soon as gameplay starts. To confirm, open
+`MGS4\scripts\MGS4EarlyEquipment.log` and look for `Restored earned inventory`.
+Loading a save that already has the gear doesn't refill it again.
 
-Manual saving follows the game's last checkpoint. Changes made after that
-checkpoint are not necessarily included until the next checkpoint. The test
-confirmed this native behavior; the mod does not replace it.
+At the Mk. II meeting the game normally hands over your gear and refills your
+supplies. When your carried weapons and permanent equipment are already there,
+the mod skips that second handover, so spent ammo and rations stay spent. The
+Mk. II story scene still plays normally. If anything is missing, the game's
+normal handover runs.
 
-To recover a backup, close MGS4, keep a copy of the current save folder, and copy
-a timestamped backup containing `BACKUP-SHA256.json` back into
-`mgs4_savedata_win`, excluding
-`BACKUP-SHA256.json`. Never restore while the game is running. Local test details
-are in `docs/save-roundtrip-tests.json`, `docs/manual-save-tests.json`, and
-`docs/backup-tests.json`.
+## Optional launcher with save backups
 
-## Install elsewhere
+`Launch-MGS4.cmd` in the game folder starts MGS4 directly, skipping the Master
+Collection launcher, and backs up your saves first. Keep Steam running.
+Launching from Steam still works, just without the backup.
 
-Extract the release ZIP into the install folder containing the `MGS4` directory.
-If you already have an ASI loader, retain your existing loader and copy only
-`MGS4\scripts\MGS4EarlyEquipment.asi`. The bundled `winmm.dll` is Ultimate ASI
-Loader x64 10.0.2. Source checkout users can run `install.ps1 -GameRoot '...'.`
+- **Language:** English by default. To change it, edit the two `set` lines at
+  the top of `Launch-MGS4.cmd`; the comment above them lists the values.
+- **Backups:** each launch copies the whole `mgs4_savedata_win` folder into a
+  new timestamped folder under `MGS4-SaveBackups`, checks every file's SHA-256,
+  and checks that nothing changed while copying. If the backup fails, the game
+  doesn't start. Old backups are never deleted; remove them when you no longer
+  need them.
 
-## Behavior and compatibility
+To restore a backup, close MGS4 and keep a copy of your current
+`mgs4_savedata_win`. Then copy the contents of a backup folder that contains
+`BACKUP-SHA256.json` into `mgs4_savedata_win`, leaving out that JSON file.
 
-- Activates only with a completed playthrough, in `s01a00l`, `s01a05l`, or
-  `s01a10l`, with scenario progress below 18.
-- Uses the carry-over weapon states, ammo pools, item counts, and OctoCamo tables.
-  The game's restoration routine excludes iPod tracks from this handover.
-- Preserves locked versus usable weapon states. It grants no infinite ammo,
-  infinite health, extra currency, or unearned Bandana/Stealth unlocks.
-- Skips the later duplicate inventory handover when the carried weapons and
-  permanent equipment are already present, including checkpoints loaded in a
-  fresh session. Spent supplies stay spent. Mk. II's story sequence still runs.
-- Refuses to hook any executable with a different SHA-256. Steam updates need
-  a verified compatibility update to this mod.
-- Other mods that replace these script functions or the opening loadout may
-  conflict. Compatibility with trainers has not been tested.
+## What it changes
 
-## Validation status
+- Activates only after a completed playthrough, in the Act 1 areas before the
+  Mk. II meeting, on any difficulty.
+- Restores carried weapons (keeping locked versus usable), ammo, items and
+  OctoCamo, as the game's own Mk. II handover does. iPod tracks aren't part of
+  that handover.
+- No infinite ammo or health, no extra Drebin Points, and no unearned unlocks
+  such as the Bandana or Stealth.
+- Doesn't change how the game saves. Saves load normally after removing the
+  mod. Manual saves store the last checkpoint rather than your exact current
+  state; that is normal MGS4 behavior.
 
-The build passes ten activation-policy checks and nine game-thread activation
-fixtures, including normal New Game, invalid carry data, later stages, and
-already-restored saves. Cold-start loading through the installed ASI loader passed.
+## Compatibility and testing
 
-The release ASI restored carry-over equipment in the actual first playable area
-(`s01a00l`, progress 1) and before Mk. II (`s01a10l`, progress 17). All 67 carried
-weapon/attachment entries matched; ammo and camo matched; Solid Eye and Mk. II
-were present, while unearned Bandana and Stealth stayed locked. The M4 model
-loaded and equipped in both worlds. Spent rations stayed spent across frames.
-The native Mk. II inventory procedure skipped a duplicate refill, and still ran
-for an unmodified inventory loaded in the same completed-run cycle.
+- Other mods that change the opening loadout or these story scripts may
+  conflict. Trainers and other mod combinations haven't been tested.
+- Linux and Steam Deck (Proton) haven't been tested. ASI loaders there usually
+  need the Steam launch option `WINEDLLOVERRIDES="winmm=n,b" %command%`.
 
-Version 0.4.0 additionally passed the actual Mk. II stage branch in two NG+
-cycles. The second cycle retained 1 spent ration and 17 M4 reserve rounds through
-the handover and returned to rendered gameplay. A simulated second Clear Data
-fixture ran through the native title NG+ procedure and restored its latest
-stock and newly earned Stealth at the opening, with an unearned Bandana absent.
-Restarting that same Clear Data restored its saved stock again. An untouched
-inventory still receives the normal Mk. II handover.
+Tested on Windows with Steam version 1.4.1:
 
-These tests used disposable process-memory Clear Data and checkpoint fixtures,
-native inventory synchronization, and movie completion callbacks. They did not
-complete another full playthrough or walk the entire opening route. Three
-native save round trips and a checkpoint reload retained the second cycle's
-spent stock and earned equipment. All gameplay save files match the pre-test
-backup. Of the 14 files in the full save folder, only `usersv` and `usersv.bak`
-differ; their write timestamps precede the isolated story tests. Current copies
-and the original backups are retained. Details are in `docs/validation.json` and
-`docs/story-tests.json` in the source checkout. Backups and development test
-modules are not shipped.
+- **Starting NG+ from Clear Data:** tested with simulated Clear Data in game
+  memory through the game's own NG+ setup; the opening movie was skipped. The
+  latest earned gear and ammo were restored and unearned items stayed locked.
+- **Act 1 areas:** gear restored in the first playable area (carry data placed
+  in game memory) and just before Mk. II (a real NG+ save loaded from the title
+  menu). Every carried weapon, ammo pool, item and camo matched.
+- **The Mk. II meeting:** the game's real story branch ran in two NG+ cycles,
+  with the cutscene skipped. Spent supplies stayed spent, while untouched
+  inventory still got the normal handover.
+- **Saving:** the game's own save and load code round-tripped saves exactly. A
+  save made from the Save menu before Mk. II reloaded with the mod, and one
+  made after Mk. II reloaded without it; both kept their exact inventory.
+
+Not tested: a complete playthrough, other game versions, and every crash,
+power-loss or mod-conflict case. Back up your saves.
 
 ## Remove
 
-Close MGS4 and remove `MGS4\scripts\MGS4EarlyEquipment.asi`. Leave `winmm.dll`
-if other ASI mods use it. The mod changes runtime state; equipment already
-written by a subsequent game save remains in that save. Use the pre-test backup
-if you need the original save state.
+Close MGS4 and delete `MGS4\scripts\MGS4EarlyEquipment.asi`. Leave `winmm.dll`
+if other mods use it. Gear already written to a save stays in that save.
 
-## Build
+## Building from source
 
-Use Zig 0.13.0 for Windows x64, then run:
+Requires Zig 0.13.0 for Windows x64 and the Git submodules:
 
 ```powershell
+git submodule update --init
 .\build.ps1 -Zig 'C:\path\to\zig.exe'
+.\package.ps1
 ```
 
-MinHook v1.3.4 sources are in `external/minhook`. The generated script header
-contains only the two restoration procedures, extracted from the local game's
-`s01a10l` GCX; no complete game assets are shipped.
+`build.ps1` compiles the mod and runs its policy checks. Technical details are
+in `docs/implementation.md`, test reports in `docs/`, and the live-game test
+harness in `tests/live/`.
 
-Technical details and credits are in `docs/implementation.md`.
+## License and credits
+
+The mod's own code is under the MIT License; see `LICENSE`. The mod also
+contains 548 bytes of the game's script bytecode (the two carry-over routines
+in `src/restore_script.h`), extracted from MGS4. That bytecode is not covered
+by the MIT License. Metal Gear Solid is a trademark of Konami Digital
+Entertainment. This is an unofficial fan mod, not affiliated with or endorsed
+by Konami.
+
+- [MinHook](https://github.com/TsudaKageyu/minhook) (BSD 2-Clause): function hooks.
+- [Ultimate ASI Loader](https://github.com/ThirteenAG/Ultimate-ASI-Loader) (MIT): bundled loader.
+- [bbtracker](https://github.com/zexk/bbtracker) (MIT): MGS4 memory layout and archive format research.
+- [MGS4 Best Trainer Ever](https://github.com/ajikfan/MGS4-Best-Trainer-Ever) (MIT):
+  live inventory documentation and the save decoder used in testing.
+- [Gcx](https://github.com/Jayveer/Gcx) (MIT) and
+  [libgcl](https://github.com/Jayveer/libgcl): game script decompilation and
+  interpreter research.

@@ -22,7 +22,8 @@ MGS4-EarlyEquipment/
 |-- README.md                   User guide and current validation summary
 |-- build.ps1                   Compile ASI and run policy checks with Zig
 |-- install.ps1                 Hash-guarded local installer; preserve ASI loader
-|-- package.ps1                 Eight-entry release ZIP and SHA-256 manifest
+|-- package.ps1                 Allowlisted release ZIP and SHA-256 manifest
+|-- LICENSE                     MIT license for the project's own code
 |-- Launch-MGS4.cmd             Verified backup, then native game launch
 |-- Backup-MGS4Saves.ps1         Retained timestamped backups and hash checks
 |-- requirements-dev.txt        Pinned Python packages for tests/live and re
@@ -99,7 +100,8 @@ game. Do not traverse them for backup, cleanup, source export or public archives
 
 ## Release layout
 
-The current user release ZIP is `dist/MGS4-EarlyEquipment-0.4.1.zip`:
+`package.ps1` builds `dist/MGS4-EarlyEquipment-<version>.zip` (0.4.2 is being
+prepared; 0.4.1 is the latest finished release):
 
 ```text
 README.md
@@ -107,6 +109,7 @@ Launch-MGS4.cmd
 Backup-MGS4Saves.ps1
 MGS4/winmm.dll
 MGS4/scripts/MGS4EarlyEquipment.asi
+licenses/MGS4-EarlyEquipment.txt   (from 0.4.2; the project's MIT license)
 licenses/MinHook.txt
 licenses/Ultimate-ASI-Loader.txt
 SHA256.json

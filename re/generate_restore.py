@@ -13,7 +13,8 @@ def getproc(n):
     elif size==13:
         size=d[start];start+=1
     return d[start:start+size],(entry>>24)&15
-out=['/* Generated from the local Steam 1.4.1 restoration procedures. */']
+out=['/* Generated from the local Steam 1.4.1 restoration procedures. This is game\n'
+     "   bytecode extracted from MGS4; it is not covered by the project's MIT License. */"]
 for n,name in [(295,'restore_inventory'),(296,'restore_camo')]:
     body,locals=getproc(n)
     print(name,'locals',locals,'bytes',len(body),'sha256',hashlib.sha256(body).hexdigest(),body[:12].hex())
