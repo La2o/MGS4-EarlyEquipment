@@ -1,3 +1,9 @@
 [submodule "external/minhook"]
 	path = external/minhook
 	url = https://github.com/TsudaKageyu/minhook.git
+[submodule "external/mgs4trainer"]
+	path = external/mgs4trainer
+	url = https://github.com/ajikfan/MGS4-Best-Trainer-Ever.git
+[submodule "external/bbtracker"]
+	path = external/bbtracker
+	url = https://github.com/zexk/bbtracker.git

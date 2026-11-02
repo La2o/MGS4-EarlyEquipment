@@ -1,0 +1,4 @@
+# Live harness (tests/live) and reverse-engineering scripts (re/). Windows x64, Python 3.12.
+capstone==5.0.9
+lz4==4.4.5
+pefile==2024.8.26

@@ -68,14 +68,16 @@ Backup launcher: <game root>\Launch-MGS4.cmd
 ```
 
 The project root is a local Git repository on branch `main`, initialized
-2026-11-02. It has no remote and nothing has been pushed. `external/minhook` is
-a submodule pinned to upstream MinHook v1.3.4 (`c3fcafd`); run
-`git submodule update --init` after a fresh clone. Other nested `.git`
-directories belong to downloaded research checkouts under ignored `research/`.
+2026-11-02. It has no remote and nothing has been pushed. Submodules in
+`external/` are pinned upstream tags: MinHook v1.3.4, MGS4 Best Trainer Ever
+V2.7.0 (ProcessHandle and save decoder for the harness) and bbtracker v0.5.0
+(VPAK reader, research notes). Run `git submodule update --init` after a fresh
+clone. Owned harness scripts are tracked in `tests/live/` and `re/`; their
+private inputs/outputs stay in ignored `research/` and `build/`. Other nested
+`.git` directories belong to research checkouts under ignored `research/`.
 `.gitignore` excludes `/research/`, `/tools/`, `/build/`, `/backups/`, `/dist/`,
-`*.log` and the generated `docs/WORKSPACE_TREE.txt`. The owned live-test
-scripts in `research/` are therefore not tracked yet; see the testing notes.
-Do not blindly force-add ignored directories containing private/game material.
+`*.log` and the generated `docs/WORKSPACE_TREE.txt`. Do not blindly force-add
+ignored directories containing private/game material.
 
 Supported target: Steam Windows x64 1.4.1, App ID `2492670`.
 Only this executable SHA-256 is accepted:
@@ -214,10 +216,11 @@ one while MGS4 runs. An identical mapped ASI is skipped. Before any rebuild,
 remember that compiler/PE timestamps can change the file hash; compare actual
 code and retest meaningful changes, not just version strings.
 
-Python used locally:
+Python used locally (3.12; no other Python is installed on this PC):
 `%USERPROFILE%\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe`.
-Live research imports the copied trainer ProcessHandle utilities plus pefile;
-disassembly uses capstone. Do not expect these paths/dependencies on another PC.
+The harness imports ProcessHandle and the save decoder from the
+`external/mgs4trainer` submodule; `requirements-dev.txt` pins pefile, capstone
+and lz4. Do not expect this interpreter path on another PC.
 
 Use installed Launch-MGS4.cmd with Steam running. Test launches used environment
 SteamAppId and SteamGameId = 2492670 and native arguments:
@@ -236,18 +239,18 @@ caused misleading black capture/loading until activation in some experiments.
 `tests/game_probe.c` compiles to build/EEGameProbe.dll with MinHook sources. It
 hooks the scheduler for game-thread RPC and observes indexed procedures. It
 exports activation/handover/cutscene helpers. Never install/package it for users.
-`research/inject.py` loads only allowlisted development modules. Verify the
+`tests/live/inject.py` loads only allowlisted development modules. Verify the
 process's full executable path is a sandbox before injecting. Release ASI must
 initialize before helper injection. Release has no EeTest/test_ API; the PE may
 still export CRT/MinHook symbols, so an assertion of zero exports is incorrect.
 
-`research/game_rpc.py`: GameRpc().base/.pid/.proc, call(fn,*args), export(name),
+`tests/live/game_rpc.py`: GameRpc().base/.pid/.proc, call(fn,*args), export(name),
 close(). Shared mapping Local\\MGS4EarlyEquipmentTests, 4096 bytes: pending LONG
 0, done LONG 4, function QWORD 8, four QWORD arguments 16, result QWORD 48.
 Calls are stateful and unsafe against the wrong stage/process. No automatic
 end-to-end suite exists; scripts require their documented setup.
 
-Useful scripts in research:
+Useful scripts in `tests/live/` (setup and full table in its README):
 
 - `ui_save_state.py`: read-only live inventory/carry snapshot.
 - `ui_select_save.py`: native pause/Save-row selection; confirm subsequent UI.
@@ -264,7 +267,8 @@ Useful scripts in research:
   ready gameplay: the first movie can still be running.
 - `test_native_save.py`, `test_native_load.py`: same-process native codec tests;
   object addresses in build/save-test-context.json are stale after a restart.
-- `disasm.py`, `extract_gcx.py`, `generate_restore.py`: local RE/extraction.
+- `re/disasm.py`, `re/extract_gcx.py`, `re/generate_restore.py`: local
+  RE/extraction; see `re/README.md`. Private inputs stay in `research/`.
 
 Some tests were orchestration snippets rather than saved runnable scripts. The
 JSON reports capture results, not a promise of a one-command reproduction.
@@ -323,8 +327,6 @@ attempts reliably terminated the actor; rely on the narrower report scope.
 ## 11. Suggested next steps
 
 - Read evidence/limits before telling the user the project is ready or fully tested.
-- Promote project-owned harness scripts from ignored research into a tracked
-  tests/tools directory with proper dependencies/licenses; exclude private data.
 - Complete an actual opening-route/campaign playthrough if full gameplay
   certification is required; fixture transitions do not substitute for that.
 - Test specific other mods only once the user names the combinations.

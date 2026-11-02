@@ -25,6 +25,7 @@ MGS4-EarlyEquipment/
 |-- package.ps1                 Eight-entry release ZIP and SHA-256 manifest
 |-- Launch-MGS4.cmd             Verified backup, then native game launch
 |-- Backup-MGS4Saves.ps1         Retained timestamped backups and hash checks
+|-- requirements-dev.txt        Pinned Python packages for tests/live and re
 |-- src/
 |   |-- early_equipment.c       Native hooks, target/source validation, restoration
 |   |-- policy.h                Opening-stage/difficulty/NG+ eligibility
@@ -33,7 +34,9 @@ MGS4-EarlyEquipment/
 |   |-- policy_test.c           Ten activation-policy checks
 |   |-- game_probe.c            Development-only game-thread RPC and fixtures
 |   |-- backup_test.py          Backup/launcher integration tests
-|   `-- launch_marker.c         Minimal fake game for launcher test assertions
+|   |-- launch_marker.c         Minimal fake game for launcher test assertions
+|   `-- live/                   Python game-thread harness clients; see README
+|-- re/                         Reverse-engineering/generation scripts; see README
 |-- docs/
 |   |-- PROJECT_STRUCTURE.md    This guide
 |   |-- WORKSPACE_TREE.txt      Complete local path inventory (untracked)
@@ -49,7 +52,10 @@ MGS4-EarlyEquipment/
 |   |-- save-integrity.json     Earlier compact save-integrity result
 |   |-- backup-tests.json       Backup/launcher results
 |   `-- package-tests.json      Verified latest release ZIP, hashes, installed ASI
-`-- external/minhook/           Submodule: upstream MinHook v1.3.4 (c3fcafd)
+`-- external/                   Pinned upstream submodules
+    |-- minhook/                MinHook v1.3.4: native hooks
+    |-- mgs4trainer/            MGS4 Best Trainer Ever V2.7.0: ProcessHandle, save decoder
+    `-- bbtracker/              bbtracker v0.5.0: VPAK reader, MGS4 research notes
 ```
 
 Some JSON detail reports intentionally retain the version that was actually
@@ -60,7 +66,7 @@ silently relabel older results as newly rerun tests.
 
 | Directory | Contents and purpose | Transfer/publication treatment |
 | --- | --- | --- |
-| `research/` | Project-created Python live tests, injection/RPC clients, state captures, GCX extraction/disassembly; third-party research checkouts and private decrypted game/save data | Whole directory ignored. Selected harness source included in handoff ZIP; raw saves, dumps and extracted game scripts excluded. |
+| `research/` | Private inputs/outputs of `tests/live` and `re`: state captures, memory dumps, extracted GCX scripts, decrypted save fixture; remaining third-party research checkouts | Whole directory ignored; never publish. |
 | `tools/zig-windows-x86_64-0.13.0/` | Local Zig compiler, Windows runtime and headers | Ignored; install Zig separately on another machine or retain locally. |
 | `build/` | Policy/marker executables, test DLLs/PDBs, temporary private fixtures, snapshots, three sandbox roots | Ignored. Do not publish or treat stale addresses/PIDs as reusable. |
 | `backups/` | Two original-save backup snapshots | Private; ignored and excluded from handoff ZIP. |
@@ -68,12 +74,8 @@ silently relabel older results as newly rerun tests.
 
 Important `research/` groups:
 
-- Top-level `.py`: owned orchestration/test/extraction scripts. See handoff for
-  stateful setup requirements; these are not a turnkey end-to-end suite.
-- `trainer/`: third-party trainer/save-reader source used for ProcessHandle,
-  read-only save decoding and native-function research. MIT license retained.
-- `bbtracker/`, `libgcl/`, `gcx/`, `patriot/`, `modloader/`: downloaded research
-  dependencies/checkouts, not the production mod source.
+- `libgcl/`, `gcx/`, `patriot/`, `modloader/`: downloaded research
+  checkouts, not the production mod source.
 - `scripts/`: extracted/decompiled game GCX/GCL files; local research only.
 - `save_decrypted.bin`, buffer/dump `.bin` files: private test/game state;
   excluded from handoff ZIP and release.
@@ -133,14 +135,12 @@ there do not imply those files are included in the archive.
 ## Git status and next-agent setup
 
 The project root is a local Git repository on branch `main`, with no remote.
-`external/minhook` is a submodule pinned to MinHook v1.3.4; run
-`git submodule update --init` after cloning. Other nested Git directories belong
-to research checkouts under ignored `research/`. Keep private/generated material
-excluded. Owned live-test scripts currently live under ignored `research/`; move
-them into a maintained harness directory if they should become part of a
-reproducible repo.
+`external/` holds three pinned submodules; run `git submodule update --init`
+after cloning. Other nested Git directories belong to research checkouts under
+ignored `research/`. Keep private/generated material excluded. Owned harness
+scripts are tracked in `tests/live/` and `re/`.
 
-Build uses Zig 0.13.0 and native Windows PowerShell. Live research additionally
-uses Python, pefile and capstone. The user-facing release needs the supported
+Build uses Zig 0.13.0 and native Windows PowerShell. The harness and RE scripts
+additionally use Python 3.12 and `requirements-dev.txt`. The user-facing release needs the supported
 installed Steam game and its ASI loader; see README for exact installation and
 the handoff for the supported executable hash and direct-launch arguments.
