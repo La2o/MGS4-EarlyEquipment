@@ -1,5 +1,6 @@
 import sys,struct,time,pathlib,json
 from game_rpc import GameRpc,ROOT
+import reports
 r=GameRpc();s=struct.unpack('<Q',r.proc.read_bytes(r.base+0x1c28b28,8))[0];carry=(ROOT/'research/save_decrypted.bin').read_bytes()[0x5b40:0x8340];w=struct.unpack_from('<95H',carry,0x129a)
 rows=[]
 for n in range(12):
@@ -10,4 +11,4 @@ for n in range(12):
  if n in (0,11):print(row)
  time.sleep(1)
 assert all(x['stage']=='s01a00l' and x['solid_eye']==1 and x['all_carried_weapons_match'] for x in rows)
-(ROOT/'docs/opening-world-tests.json').write_text(json.dumps({'version':'0.3.0','scope':'Cold-start release ASI in real s01a00l world; carry tables seeded in disposable memory; no save files edited','samples':rows},indent=2)+'\n');r.close()
+reports.save('opening-world-tests.json',{'version':reports.asi_version(r.pid),'scope':'Cold-start release ASI in real s01a00l world; carry tables seeded in disposable memory; no save files edited','samples':rows},r.pid);r.close()

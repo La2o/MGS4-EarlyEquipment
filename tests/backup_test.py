@@ -41,6 +41,8 @@ for _ in range(30):
 assert (fixture/'MGS4/game-started.marker').exists()
 report={'backup_failure_blocks_game_launch':True,'success_starts_game_after_backup':True,
         'backups_preserve_exact_bytes':True,'previous_backups_not_overwritten':True,
-        'source_saves_unchanged':True,'running_game_backup_rejected_in_live_test':True}
-(root/'docs/backup-tests.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
-print('Backup integration checks passed.')
+        'source_saves_unchanged':True}
+# Results go to ignored build/reports; docs/backup-tests.json is reviewed evidence.
+out=root/'build'/'reports';out.mkdir(parents=True,exist_ok=True)
+(out/'backup-tests.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
+print('Backup integration checks passed. Wrote',out/'backup-tests.json')

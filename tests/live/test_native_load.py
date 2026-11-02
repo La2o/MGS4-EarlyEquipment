@@ -1,5 +1,6 @@
 import sys,struct,pathlib,zlib,json
 from game_rpc import GameRpc,ROOT
+import reports
 import mgs4save
 r=GameRpc();ctx=json.loads((ROOT/'build/save-test-context.json').read_text());b=r.base;obj=ctx['object'];assert b==ctx['base']
 ptr=lambda x:struct.unpack('<Q',r.proc.read_bytes(b+x,8))[0]
@@ -25,6 +26,6 @@ r.proc.write_bytes(obj+0xd60,bytes(bad));r.proc.write_bytes(obj+0x6dc,struct.pac
 result=r.call(b+0x4ba400,obj);error=r.call(b+0x4b2200);assert result==0xffffffff and error==2
 r.call(b+0x4b2240,0)
 report={'scope':'Native save serializer and native load/validation routines on the game thread, isolated sandbox, serialized payload written to disk and read back. This does not exercise the manual-save UI or outer file writer.','payload_bytes':len(encoded),'roundtrips':rows,'intentionally_damaged_payload_rejected':True,'damaged_payload_error':error,'mod_save_encoder_decoder_hooks':False}
-(ROOT/'docs/save-roundtrip-tests.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report,indent=2));r.close()
+reports.save('save-roundtrip-tests.json',report,r.pid);print(json.dumps(report,indent=2));r.close()
 
 

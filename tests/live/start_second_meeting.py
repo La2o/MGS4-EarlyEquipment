@@ -1,5 +1,6 @@
 import sys,struct,time,pathlib,json
 from game_rpc import GameRpc,ROOT
+import reports
 r=GameRpc();b=r.base;ptr=lambda off:struct.unpack('<Q',r.proc.read_bytes(b+off,8))[0]
 for _ in range(80):
  s=ptr(0x1c28b28)
@@ -15,4 +16,4 @@ checkpoint=ptr(0x1c28b30);r.call(b+0xd25800,checkpoint,s,0x5b40);r.call(b+0xd258
 original=(ROOT/'research/save_decrypted.bin').read_bytes()
 r.proc.write_bytes(checkpoint+0x2c,original[0x2c:0x3c]);r.proc.write_bytes(checkpoint+0x54,struct.pack('<I',18))
 print('Starting second-run Mk. II checkpoint with 1 ration and 17 M4 reserve rounds:',r.call(b+0x5bcb0,0))
-p=(ROOT/'docs/story-tests.json');report=json.loads(p.read_text());report['next_NGplus']['playable_opening_verified']=True;p.write_text(json.dumps(report,indent=2)+'\n');r.close()
+report=reports.load('story-tests.json',{});report.setdefault('next_NGplus',{})['playable_opening_verified']=True;reports.save('story-tests.json',report,r.pid);r.close()

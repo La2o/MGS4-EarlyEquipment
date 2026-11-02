@@ -1,6 +1,7 @@
 import sys,struct,json,pathlib
 ROOT=pathlib.Path(__file__).resolve().parents[2];sys.path.insert(0,str(ROOT/'external/mgs4trainer'))
 from mgs4trainer.core.winproc import find_pid,find_module_base,ProcessHandle
+import reports
 pid=find_pid('mgs4.exe');base=find_module_base(pid,'mgs4.exe');p=ProcessHandle(pid)
 s=struct.unpack('<Q',p.read_bytes(base+0x1c28b28,8))[0]
 v=struct.unpack('<Q',p.read_bytes(base+0x1c28b38,8))[0]
@@ -9,7 +10,7 @@ saved=struct.unpack_from('<95H',carry,0x129a)
 live=[struct.unpack('<H',p.read_bytes(base+0x1d825aa+i*0x50,2))[0] for i in range(95)]
 items=[struct.unpack('<h',p.read_bytes(base+0x1d84344+i*0x48,2))[0] for i in range(99)]
 report={
- 'version':'0.2.0',
+ 'version':reports.asi_version(pid,'MGS4EarlyEquipmentLive.asi'),
  'stage':snapshot[0x34:0x3b].decode(),
  'scenario_progress':struct.unpack_from('<I',snapshot,0x54)[0],
  'completed_playthroughs':struct.unpack_from('<H',snapshot,0)[0],
@@ -28,5 +29,5 @@ p.close()
 assert report['scenario_progress']==17
 assert all(report[k] for k in ['all_carried_weapon_states_match','solid_eye_available','mk_ii_available','unearned_bandana_stays_locked','unearned_stealth_stays_locked','camo_tables_match'])
 assert report['handover_log_entries']==1
-(ROOT/'docs/validation.json').write_text(json.dumps(report,indent=2)+'\n')
+reports.save('validation-live.json',report,pid)
 print(json.dumps(report,indent=2))

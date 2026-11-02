@@ -1,5 +1,6 @@
 import sys,struct,pathlib,json
 from game_rpc import GameRpc,ROOT
+import reports
 r=GameRpc()
 fixture=(ROOT/'research/save_decrypted.bin').read_bytes()[0x5b40:0x8340]
 assert len(fixture)==0x2800
@@ -13,5 +14,5 @@ for name,mode,expected in cases:
     result=r.call(run,handover,mode,remote)
     row={'test':name,'actual':result,'expected':expected,'passed':result==expected};report.append(row);print(row)
     assert result==expected,name
-(ROOT/'docs/activation-tests.json').write_text(json.dumps(report,indent=2)+'\n')
+reports.save('activation-tests.json',report,r.pid)
 r.close()

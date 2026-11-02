@@ -262,9 +262,8 @@ Useful scripts in `tests/live/` (setup and full table in its README):
 - `start_next_ngplus.py`: requires title script (199 procs) and private
   build/next-clear-fixture.bin, invokes real title proc 198.
 - `verify_next_ngplus.py`: requires title_movie (8 procs), completion proc 8,
-  checks opening. It overwrites its next_NGplus report object; preserve additional
-  report fields when extending it. Opening scenario alone is not proof of input-
-  ready gameplay: the first movie can still be running.
+  checks opening and merges its `next_NGplus` result. Opening scenario alone is
+  not proof of input-ready gameplay: the first movie can still be running.
 - `test_native_save.py`, `test_native_load.py`: same-process native codec tests;
   object addresses in build/save-test-context.json are stale after a restart.
 - `re/disasm.py`, `re/extract_gcx.py`, `re/generate_restore.py`: local
@@ -272,6 +271,9 @@ Useful scripts in `tests/live/` (setup and full table in its README):
 
 Some tests were orchestration snippets rather than saved runnable scripts. The
 JSON reports capture results, not a promise of a one-command reproduction.
+Scripts therefore never write `docs/`: results go to ignored `build/reports/`
+with a `<name>.runs.json` log of script, time and loaded module hashes/versions.
+Promote a result into `docs/` only by a reviewed manual merge.
 The native-sync command must run before copying active link inventory into a
 fixture snapshot. Use complete authentic world state for cross-stage fixtures.
 Wait for actual movie proc 998 initialization before calling completion 1001.
@@ -330,8 +332,8 @@ attempts reliably terminated the actor; rely on the narrower report scope.
 - Complete an actual opening-route/campaign playthrough if full gameplay
   certification is required; fixture transitions do not substitute for that.
 - Test specific other mods only once the user names the combinations.
-- Improve harness reproducibility and stop old scripts from overwriting report
-  fields. Keep historical report versions explicit.
+- Improve harness reproducibility. Keep historical report versions explicit
+  when promoting results from `build/reports/` into `docs/`.
 - The current release needs no known code fix from the latest tests. Preserve
   the verified ASI/release hashes unless intentionally changing/rebuilding it.
 

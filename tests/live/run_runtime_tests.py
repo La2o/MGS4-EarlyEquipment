@@ -1,5 +1,6 @@
 import sys,struct,time,pathlib,json
 from game_rpc import GameRpc,ROOT
+import reports
 r=GameRpc();s=struct.unpack('<Q',r.proc.read_bytes(r.base+0x1c28b28,8))[0];v=struct.unpack('<Q',r.proc.read_bytes(r.base+0x1c28b38,8))[0]
 state=r.proc.read_bytes(s,0x5b40)
 print('Before:',state[0x34:0x3b],struct.unpack_from('<HI',state,0)[0],struct.unpack_from('<I',state,0x54)[0])
@@ -16,5 +17,5 @@ print(checks);assert all(checks.values())
 fn=r.export('test_handover_guard')
 for mode,expected,name in [(0,1,'Mk. II does not refill spent supplies'),(1,0,'Unmodified save reload still receives native handover')]:
  result=r.call(fn,mode);print(name,result);checks[name]=result==expected;assert result==expected
-(ROOT/'docs/runtime-tests.json').write_text(json.dumps({'version':'0.3.0','scope':'Real s01a10l world, disposable NG+ carry fixture, native game-thread RPC','checks':checks},indent=2)+'\n')
+reports.save('runtime-tests.json',{'version':reports.asi_version(r.pid),'scope':'Real s01a10l world, disposable NG+ carry fixture, native game-thread RPC','checks':checks},r.pid)
 r.close()

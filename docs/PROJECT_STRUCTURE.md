@@ -91,6 +91,8 @@ Important `build/` groups:
   normal game. Normal installed game was checked without these modules.
 - `ui-*.json`, `*-context.json`, `*-fixture.bin`: local snapshots and runtime
   state. Native object addresses become invalid after process restart.
+- `reports/`: results from `tests/live` scripts and `tests/backup_test.py`, each
+  with a `.runs.json` provenance log. Review before promoting into `docs/`.
 
 Sandbox `MGS4/common`, `MGS4/ww`, and `MGS4/Jpgs` are junctions to the installed
 game. Do not traverse them for backup, cleanup, source export or public archives.
